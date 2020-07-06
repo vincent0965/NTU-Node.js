@@ -46,7 +46,7 @@ let url = 'https://store.line.me/stickershop/product/17970/zh-Hant';
         arrStickers = Array.from( new Set(arrStickers) );
 
         //若沒資料夾，則直接建立
-        //(existsSync、mkdirSync 與 exists、mkdir 的差異，在於有 sync 的函式，不需要 callback)
+        //(註: existsSync、mkdirSync 與 exists、mkdir 的差異，在於有 sync 的函式，不需要 callback)
         if (! await fs.existsSync(`downloads`) ){ 
             await fs.mkdirSync(`downloads`, {recursive: true}); //遞迴建立資料夾
         }
