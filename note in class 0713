@@ -4,15 +4,15 @@ let MininHour = 60 ;
 let secondesInHour =  secondsInMin * MininHour ;
 console.log(secondesInHour);*/
 
-// for( i = 0 ; i < 10 ; i++ ) { 
-// console.log(i);
-// }
+for( i = 0 ; i < 10 ; i++ ) { 
+ console.log(i);
+ }
 
-// console.log(arrName);
-// var arrName = ["Alex", "Bill", "candy"];
+    console.log(arrName);
+    var arrName = ["Alex", "Bill", "candy"];
 
-// console.log(arrName);
-// let arrName = ["Alex", "Bill", "candy"];
+    console.log(arrName);
+    let arrName = ["Alex", "Bill", "candy"];
 
 /* let vs var
 在先輸出變數的情況下
@@ -20,7 +20,31 @@ console.log(secondesInHour);*/
 但是使用var的話會顯示為undefined(未定義)
 使用let較為嚴謹 如果使用var定義變數 此變數可能會跑到主程式(例如跳出迴圈)*/
 
-const PI = 3.1415926;
-// PI = 3.14;
+const PI = 3.1415926; //const 定義一個常數
 console.log(PI);
+
+        let i = 7 ; 
+        let j = 3 ;
+        i = i + j ;
+        console.log(i);
+
+        let x = 10 ; 
+        let y = 3 ;
+        let z = x % y ; // %取餘數
+        console.log(z);
+
+            let firstName =  "vincent" ;
+            let lastName = " Tsai" ;
+            let space = " " ; 
+            fullName = firstName + space + lastName;
+            console.log(fullName);
+            console.log(`Dear ${fullName}, Happy graduation!`);
+            console.log("Dear " + fullName + ", Happy graduation!" );
+            /* `中間可以使用${} 在{}中直接加入變數`
+            否則要使用"...."+ 變數 + "...." 的方式*/
+
+let hadShoes = true ; 
+let hadBag = false ;
+console.log(hadShoes && hadBag); // && == 且
+console.log(hadShoes || hadBag); // || == 或
 
