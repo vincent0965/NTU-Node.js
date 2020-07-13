@@ -8,11 +8,12 @@ for( i = 0 ; i < 10 ; i++ ) {
  console.log(i);
  }
 
-    console.log(arrName);
-    var arrName = ["Alex", "Bill", "candy"];
+ console.log();
+    // console.log(arrName);
+    // var arrName = ["Alex", "Bill", "candy"];
 
-    console.log(arrName);
-    let arrName = ["Alex", "Bill", "candy"];
+    // console.log(arrName);
+    // let arrName = ["Alex", "Bill", "candy"];
 
 /* let vs var
 在先輸出變數的情況下
@@ -23,15 +24,21 @@ for( i = 0 ; i < 10 ; i++ ) {
 const PI = 3.1415926; //const 定義一個常數
 console.log(PI);
 
-        let i = 7 ; 
-        let j = 3 ;
-        i = i + j ;
-        console.log(i);
+    console.log();
+
+        let a = 7 ; 
+        let b = 3 ;
+        c = a + b ;
+        console.log(c);
+
+        console.log();
 
         let x = 10 ; 
         let y = 3 ;
         let z = x % y ; // %取餘數
         console.log(z);
+
+        console.log();
 
             let firstName =  "vincent" ;
             let lastName = " Tsai" ;
@@ -43,8 +50,87 @@ console.log(PI);
             /* `中間可以使用${} 在{}中直接加入變數`
             否則要使用"...."+ 變數 + "...." 的方式*/
 
+//Bool 判斷
 let hadShoes = true ; 
 let hadBag = false ;
 console.log(hadShoes && hadBag); // && == 且
 console.log(hadShoes || hadBag); // || == 或
 
+console.log();
+
+let height1 = 170;
+let hetght2 = 160;
+console.log(height1 > hetght2);
+
+/* == & === 
+== ->兩邊相等 如果資料型態不同會強制轉成一樣的再比較
+=== ->觀察兩邊資料型態有無相同 如果不相同質些產生 false */
+
+let hetght3 = "160";
+console.log(height1 === hetght3);
+console.log(height1 == hetght3);
+
+console.log( );
+
+let condition1 = false;
+if(condition1){
+    console.log("It`s true");
+}else{
+    console.log("It`s false");
+}
+
+console.log();
+
+let number = 7 ;
+    if(number > 10 ){
+        console.log("大於10");
+    }else if(number < 3){
+        console.log("小於3");
+    }else if(number > 5){
+        console.log("大於5");
+    }
+
+console.log();
+
+    if(number > 10 ) console.log("大於10");
+    if(number < 3)   console.log("小於3");
+    if(number > 5)   console.log("大於5");
+
+console.log();
+
+switch(number){
+
+    case'7':
+        console.log('string 7');
+    break;
+
+    case 7 :
+        console.log('number 7');
+    break;
+
+    case'number':
+        console.log('string number');
+    break;
+
+    default:
+        console.log('string default');
+
+}
+/* switch指嚴格比對
+會比較()內的物件是否相符 並進行相對的輸出*/
+
+console.log();
+
+let number2 = 1
+while(number2 <= 10){
+    console.log(number2);
+    number2++; 
+    //需要記得設入停止條件 如果要停止程式 ctrl + c
+}
+
+console.log();
+
+do{
+    console.log(number2);
+    number2++;
+}while( number2 <= 10)
