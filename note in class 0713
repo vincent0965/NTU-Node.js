@@ -1,0 +1,26 @@
+/*console.log();
+let secondsInMin = 60 ;
+let MininHour = 60 ; 
+let secondesInHour =  secondsInMin * MininHour ;
+console.log(secondesInHour);*/
+
+// for( i = 0 ; i < 10 ; i++ ) { 
+// console.log(i);
+// }
+
+// console.log(arrName);
+// var arrName = ["Alex", "Bill", "candy"];
+
+// console.log(arrName);
+// let arrName = ["Alex", "Bill", "candy"];
+
+/* let vs var
+在先輸出變數的情況下
+如果使用let定義變數 會直接報錯
+但是使用var的話會顯示為undefined(未定義)
+使用let較為嚴謹 如果使用var定義變數 此變數可能會跑到主程式(例如跳出迴圈)*/
+
+const PI = 3.1415926;
+// PI = 3.14;
+console.log(PI);
+
