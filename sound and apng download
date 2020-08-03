@@ -56,3 +56,36 @@ let url = 'https://store.line.me/stickershop/product/15173/zh-Hant';
 
     }
 )();
+
+//以上為走訪網頁並抓取聲音或動畫 並存成Json檔
+
+const util = require('util');
+const fs = require('fs');
+const exec = util.promisify( require('child_process').exec );
+
+(
+    async function () {
+        let strJson = await fs.readFileSync('downloads/line_stickers.json', { encoding: 'utf-8' });
+        let arr = JSON.parse(strJson);
+
+        //若沒資料夾，則直接建立
+        //(註: existsSync、mkdirSync 與 exists、mkdir 的差異，在於有 sync 的函式，不需要 callback)
+        if (! await fs.existsSync(`downloads/line-stickers`) ){ 
+            await fs.mkdirSync(`downloads/line-stickers`, {recursive: true}); //遞迴建立資料夾
+        }
+
+        for(let i = 0; i < arr.length; i++){
+            //console.log(arr[i]);
+            let regex = /https:\/\/stickershop\.line-scdn\.net\/stickershop\/v1\/sticker\/([0-9]+)\/android\/sticker_sound\.m4a/g;
+            let match = null;
+            if((match = regex.arr([i])) !== null){
+                await exec(`curl -k -X GET ${arr[i]} -o "downloads/line-stickers/${i}.m4a" `);
+                //-k/-x:將檔案網址GET過來(從arr[i]抓取);-o:另存新檔 因為後面使用自己的路徑 所以採用另存新檔
+                //await 一定要在 async裡面
+                //聲音:副檔名m4a;動圖:apng
+            }
+        }
+    }
+)();
+
+//以上為把存成Json檔的檔案下載
