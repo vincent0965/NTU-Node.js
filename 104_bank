@@ -85,12 +85,23 @@ async function scrollPage(){
 
             console.log(`totalOffset = ${totalOffset}, innerHeightOfWindow = ${innerHeightOfWindow}`);
 
+            //接近底部時，按下一頁
+            if( (innerHeightOfWindow - totalOffset) < 2000 && await nightmare.exists('button.b-btn.b-btn--link.js-more-page')){
+            await _checkPagination();
+        }
+
             //當我的網頁滾動達到5000時就停止
             if(totalOffset > 5000){
                 break;
             }
     }
 }
+
+//按「下一頁」
+async function _checkPagination(){
+    await nightmare
+    .wait('button.b-btn.b-btn--link.js-more-page')
+    .click('button.b-btn.b-btn--link.js-more-page');
 
 async function parseHtml(){
     console.log('分析並收集重要資訊');
@@ -147,6 +158,49 @@ async function parseHtml(){
     });
 }
 
+async function getDetailInfo(){
+
+    for(let i = 0; i < arrLink.length; i++){
+
+        //找到arrLink 下面的每一個obj
+        let html = await nightmare
+        .goto(arrLink[i].positionLink)
+        .wait('div.job-description-table.row div.row.mb-2')
+        .evaluate(function(){
+            return document.documentElement.innerHTML;
+        });
+
+        //取得上班地點
+        let positionPlace = $(html)
+        .find('div.job-description-table.row div.row.mb-2:nth-of-type(4) p.t3.mb-0')
+        .text().trim();
+
+        //取得職務的類別
+        let positionCategory = '';
+        let arrTmpConcat = [];
+        $(html).find('div.col.p-0.job-description-table__data > div > div > div > u')
+        .each(function(index, element){
+            arrTmpConcat.push($(element).text().trim());
+        });
+        
+        /**
+         * array.join("字元或字串"):
+         * 將陣列(array)所有的值，以「,」符號連結後，變成字串
+         * 例如
+         * let arr = ["工程師","設計師","管理師"];
+         * console.log( arr.join("_") )
+         * 印出「工程師_設計師_管理師」
+         */
+        positionCategory = arrTmpConcat.join(',');
+        
+
+        //在既有 arrLink 陣列當中的各個物件（{key:value, key: value}）中，新增屬性和值
+        arrLink[i].positionPlace = positionPlace;
+        arrLink[i].positionCategory = positionCategory;
+    }
+
+}
+
 //透過迴圈特性，將陣列中的各個 function 透過 await 逐一執行
 async function asyncArray(functionList){
     for(let func of functionList){
@@ -160,9 +214,11 @@ async function asyncArray(functionList){
             init,
             search, 
             setJobType,
-            scrollPage, 
-            parseHtml
-        ]).then(async () =>{
+            scrollPage,
+            parseHtml,
+            getDetailInfo,
+            close
+        ]).then(async function(){
             console.dir(arrLink, {depth: null});
             await fs.writeFileSync(`downloads/104.json`, JSON.stringify(arrLink, null, 4));
             console.log('Done');
